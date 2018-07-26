@@ -1,0 +1,17 @@
+[template]
+src = "config.yaml.tmpl"
+dest = "/config.yaml"
+keys = [
+    "/grafeas/api/address",
+    "/grafeas/api/cafile",
+    "/grafeas/api/keyfile",
+    "/grafeas/api/certfile",
+    "/grafeas/api/cors/allowed/origins",
+    "/grafeas/storage/type",
+    "/grafeas/postgres/host",
+    "/grafeas/postgres/dbname",
+    "/grafeas/postgres/user",
+    "/grafeas/postgres/password",
+    "/grafeas/postgres/sslmode",
+    "/grafeas/postgres/paginationkey"
+]

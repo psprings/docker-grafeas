@@ -1,0 +1,48 @@
+# Copyright 2017 The Grafeas Authors. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+grafeas:
+  # Grafeas api server config
+  api:
+    # Endpoint address
+    address: "{{if ls "/grafeas/api/address"}}{{getv "/grafeas/api/address"}}{{else}}0.0.0.0:8080{{end}}"
+    # PKI configuration (optional)
+    cafile: {{if ls "/grafeas/api/cafile"}}"{{getv "/grafeas/api/cafile"}}"{{end}}
+    keyfile: {{if ls "/grafeas/api/keyfile"}}"{{getv "/grafeas/api/keyfile"}}"{{end}}
+    certfile: {{if ls "/grafeas/api/certfile"}}"{{getv "/grafeas/api/certfile"}}"{{end}}
+    # CORS configuration (optional)
+    cors_allowed_origins:
+      {{- if ls "/grafeas/api/cors/allowed/origins"}}{{ $origins := split (getv "/grafeas/api/cors/allowed/origins") "," }}{{- range $idx, $origin := $origins }}
+       - "{{ $origin }}"{{end}}{{else}}
+       # - "http://example.net"{{end}}
+  # Supported storage types are "memstore" and "postgres"
+  storage_type: "{{if ls "/grafeas/storage/type"}}{{getv "/grafeas/storage/type"}}{{else}}memstore{{end}}"
+  # Postgres options
+  postgres:
+    # Database host
+    host: "{{if ls "/grafeas/postgres/host"}}{{getv "/grafeas/postgres/host"}}{{else}}127.0.0.1:5432{{end}}"
+    # Database name
+    dbname: "{{if ls "/grafeas/postgres/dbname"}}{{getv "/grafeas/postgres/dbname"}}{{else}}postgres{{end}}"
+    # Database username
+    user: "{{if ls "/grafeas/postgres/user"}}{{getv "/grafeas/postgres/user"}}{{else}}postgres{{end}}"
+    # Database password
+    password: "{{if ls "/grafeas/postgres/password"}}{{getv "/grafeas/postgres/password"}}{{else}}password{{end}}"
+    # Valid sslmodes disable, allow, prefer, require, verify-ca, verify-full.
+    # See https://www.postgresql.org/docs/current/static/libpq-connect.html for details
+    sslmode: "{{if ls "/grafeas/postgres/sslmode"}}{{getv "/grafeas/postgres/sslmode"}}{{else}}require{{end}}"
+    # 32-bit URL-safe base64 key used to encrypt pagination tokens
+    # If one is not provided, it will be generated.
+    # Multiple grafeas instances in the same cluster need the same value.
+    paginationkey: {{if ls "/grafeas/postgres/paginationkey"}}{{getv "/grafeas/postgres/paginationkey"}}{{end}}
+    
