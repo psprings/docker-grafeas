@@ -1,4 +1,4 @@
-lint:
+sut:
   dockerfile: test/Dockerfile
   build: .
   command: hadolint --ignore DL3007 - Dockerfile
