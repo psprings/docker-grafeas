@@ -1,22 +1,6 @@
 # docker-grafeas
 
-## Building the image
-
-To build and run this image locally, run the following command:
-
-```bash
-./build.sh
-```
-
 ## Start a Grafeas server
-
-From locally built image:
-
-```bash
-docker run --name grafeas -p 8080:8080 grafeas
-```
-
-A prebuilt image can also be used:
 
 ```bash
 docker run --name grafeas -p 8080:8080 psprings/grafeas

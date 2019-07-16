@@ -7,4 +7,4 @@ fi
 
 /usr/local/bin/confd -onetime -backend "${CONFD_BACKEND}"
 
-exec /grafeas-server "$@"
+exec ./grafeas-server "$@"
